@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <style>
+    ul {
+      list-style-type: none;
+    }
+    .todo-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+    button {
+      background-color:green;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Todo List</h1>
+  <input type="text" id="todo-input" placeholder="Enter a new todo">
+  <button id="add-todo-btn">Add Todo</button>
+  <ul id="todo-list"></ul>
+
+  <script>
+    
+let todoInput = document.getElementById('todo-input');
+let addTodoBtn = document.getElementById('add-todo-btn');
+let todoList = document.getElementById('todo-list');
+
+addTodoBtn.addEventListener('click', () => {
+  let todoText = todoInput.value.trim();
+  if (todoText === '') {
+    alert('Please enter a todo!');
+    return;
+  }
+
+  let todoItem = document.createElement('li');
+  todoItem.classList.add('todo-item');
+  todoItem.innerHTML = `<span>${todoText}</span><button class="delete-btn">Delete</button>`;
+
+
+  todoList.appendChild(todoItem);
+
+  todoInput.value = '';
+
+  
+  let deleteBtn = todoItem.querySelector('.delete-btn');
+  deleteBtn.addEventListener('click', () => {
+    todoItem.remove();
+  });
+});
+  </script>
+</body>
+</html>
